@@ -1,0 +1,1 @@
+/home/caio/Documentos/HunterBay/buildSrc/build/classes/kotlin/main/Versions.class
