@@ -73,11 +73,9 @@ class CreateAccountActivity : AppCompatActivity() {
                 is CreateAccountViewModel.Status.Created -> {
                     binding.pbCreateAccount.visibility = View.GONE
                     binding.btnCreateAccount.text = "CRIAR CONTA"
-                    if(it.response.isSuccessful) {
-                        createDialog {
-                            setMessage(it.response.errorBody()?.charStream()?.readText())
-                        }.show()
-                    }
+                    createDialog {
+                        setMessage(it.response.errorBody()?.charStream()?.readText())
+                    }.show()
                 }
                 is CreateAccountViewModel.Status.ErrorAccount -> {
                     createDialog {

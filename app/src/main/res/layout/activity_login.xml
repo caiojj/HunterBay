@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tie_senha"
+                    android:id="@+id/tie_password"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -85,13 +85,29 @@
                 android:layout_gravity="end"
                 android:text="@string/forget_password" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login"
-                android:layout_marginTop="10dp"
-                android:text="Entrar"
-                android:textColor="@color/white"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login"
+                    android:layout_marginTop="10dp"
+                    android:text="Entrar"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/pg_login"
+                    app:indicatorSize="29dp"
+                    app:layout_constraintStart_toStartOf="@id/btn_login"
+                    app:layout_constraintEnd_toEndOf="@id/btn_login"
+                    app:layout_constraintTop_toTopOf="@id/btn_login"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_login"
+                    android:indeterminate="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
     <LinearLayout

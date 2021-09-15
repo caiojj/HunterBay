@@ -4,6 +4,7 @@ import android.util.Log
 import br.com.hunterbay.data.repository.remote.RemoteRepository
 import br.com.hunterbay.data.repository.remote.RemoteRepositoryImp
 import br.com.hunterbay.data.services.CreateAccountService
+import br.com.hunterbay.data.services.LoginService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,7 +25,7 @@ object DataModule {
 
     private fun remoteRepository(): Module {
         return module {
-            single<RemoteRepository> { RemoteRepositoryImp(get()) }
+            single<RemoteRepository> { RemoteRepositoryImp(get(), get()) }
         }
     }
 
@@ -42,6 +43,7 @@ object DataModule {
             }
             single { GsonConverterFactory.create(GsonBuilder().create()) }
             single { createService<CreateAccountService>(get(), get()) }
+            single { createService<LoginService>(get(), get()) }
         }
     }
 
