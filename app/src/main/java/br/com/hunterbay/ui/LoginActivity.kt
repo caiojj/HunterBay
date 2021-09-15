@@ -39,11 +39,10 @@ class LoginActivity : AppCompatActivity() {
                     }.show()
                 }
                 is LoginViewModel.State.Logged -> {
-                    binding.pgLogin.visibility = View.GONE
-                    binding.btnLogin.text = "ENTRAR"
-                    createDialog {
-                        setMessage(it.body.body()?.name)
-                    }.show()
+                    if (it.body.isSuccessful) {
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
                 }
             }
         }
