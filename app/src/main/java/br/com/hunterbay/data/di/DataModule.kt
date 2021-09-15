@@ -1,6 +1,10 @@
 package br.com.hunterbay.data.di
 
 import android.util.Log
+import br.com.hunterbay.data.repository.remote.RemoteRepository
+import br.com.hunterbay.data.repository.remote.RemoteRepositoryImp
+import br.com.hunterbay.data.services.CreateAccountService
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.context.loadKoinModules
@@ -15,7 +19,13 @@ object DataModule {
     private const val HTTP_TAG = "okHTTP"
 
     fun load() {
-        loadKoinModules(networkModule())
+        loadKoinModules(networkModule() + remoteRepository())
+    }
+
+    private fun remoteRepository(): Module {
+        return module {
+            single<RemoteRepository> { RemoteRepositoryImp(get()) }
+        }
     }
 
     private fun networkModule(): Module {
@@ -30,16 +40,18 @@ object DataModule {
                     .addInterceptor(interceptor)
                     .build()
             }
+            single { GsonConverterFactory.create(GsonBuilder().create()) }
+            single { createService<CreateAccountService>(get(), get()) }
         }
     }
 
-    private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory) {
-        Retrofit
+    private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T {
+        return Retrofit
             .Builder()
             .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(factory)
             .build()
-            .create<T>()
+            .create(T::class.java)
     }
 }

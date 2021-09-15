@@ -11,5 +11,6 @@
     <string name="btn_create_account">Cria conta</string>
     <string name="set_email">Digite seu e-mail</string>
     <string name="instructions_password"> Para redefinir sua senha, informe o usuário ou email cadastrado na sua conta e lhe enviaremos um link com as instruções.</string>
+    <string name="lastName">Sobrenome</string>
 </resources>
 
